@@ -1,6 +1,7 @@
 package com.balloon.api;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,19 +26,19 @@ public class BizTpRestController {
 	// CREATE -------------------------------
 	@PostMapping(value = "/biztp", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertBizTP(@RequestBody BizTpDTO bizTpDTO) {
-		bizTpDTO.setBusinessTripId(bizTpDTO.getBusinessTripId());
-		bizTpDTO.setDocumentTitle(bizTpDTO.getDocumentTitle());
-		bizTpDTO.setDocumentContent(bizTpDTO.getDocumentContent());
-		bizTpDTO.setDocumentStatus((byte) 1);
-		bizTpDTO.setStartDate(bizTpDTO.getStartDate());
-		bizTpDTO.setEndDate(bizTpDTO.getEndDate());
-		bizTpDTO.setDestination(bizTpDTO.getDestination());
-		bizTpDTO.setVisitingPurpose(bizTpDTO.getVisitingPurpose());
-		bizTpDTO.setEmpName(bizTpDTO.getEmpName());
-		bizTpDTO.setPosition(bizTpDTO.getPosition());
-		bizTpDTO.setUnitName(bizTpDTO.getUnitName());
-		bizTpDTO.setUnit(bizTpDTO.getUnit());
-		bizTpDTO.setEmp(bizTpDTO.getEmp());
+//		bizTpDTO.setBusinessTripId(bizTpDTO.getBusinessTripId());
+//		bizTpDTO.setDocumentTitle(bizTpDTO.getDocumentTitle());
+//		bizTpDTO.setDocumentContent(bizTpDTO.getDocumentContent());
+//		bizTpDTO.setDocumentStatus(bizTpDTO.getDocumentStatus());
+//		bizTpDTO.setStartDate(bizTpDTO.getStartDate());
+//		bizTpDTO.setEndDate(bizTpDTO.getEndDate());
+//		bizTpDTO.setDestination(bizTpDTO.getDestination());
+//		bizTpDTO.setVisitingPurpose(bizTpDTO.getVisitingPurpose());
+//		bizTpDTO.setEmpName(bizTpDTO.getEmpName());
+//		bizTpDTO.setPosition(bizTpDTO.getPosition());
+//		bizTpDTO.setUnitName(bizTpDTO.getUnitName());
+//		bizTpDTO.setUnit(bizTpDTO.getUnit());
+//		bizTpDTO.setEmp(bizTpDTO.getEmp());
 
 		BizTpSvc.insertBizTp(bizTpDTO);
 	}
@@ -48,6 +49,11 @@ public class BizTpRestController {
 		return BizTpSvc.getBizTpByBizTpId(bizTpId);
 	}
 
+	@GetMapping(value = "/biztp/wd")
+	public BizTpDTO getLatestBizTp() {
+		return BizTpSvc.getBizTpWD();
+	}
+
 	// UPDATE -------------------------------
 	@PutMapping(value = "/biztp/{bizTpId}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateBizTpByBizTpId(@PathVariable("bizTpId") String bizTpId, @RequestBody BizTpDTO bizTpDTO) {
@@ -56,6 +62,7 @@ public class BizTpRestController {
 	}
 
 	// DELETE -------------------------------
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/biztp/{bizTpId}")
 	public void deleteBizTpByBizTpId(@PathVariable("bizTpId") String bizTpId) {
 		BizTpSvc.deleteBizTpByBizTpId(bizTpId);

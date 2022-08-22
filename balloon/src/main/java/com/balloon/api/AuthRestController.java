@@ -1,5 +1,7 @@
 package com.balloon.api;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -31,8 +33,21 @@ public class AuthRestController {
 			throws JsonProcessingException {
 		System.out.println(requestDto);
 		try {
-
 			return ResponseEntity.ok(authSvc.signup(requestDto));
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@PostMapping(value = "/signuplist")
+	public Boolean signupList(@Valid @RequestBody List<EmpRequestDTO> requestDtoList) throws JsonProcessingException {
+		try {
+			if (requestDtoList == null) {
+				throw new Exception("입력받은 값이 없습니다.");
+			}
+			boolean signupChk = authSvc.signupList(requestDtoList);
+			return signupChk;
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -47,7 +62,6 @@ public class AuthRestController {
 		if (tokenDTO != null) {
 			// 로그인 완료 후 토큰을 cookie에 넣어주기
 			Cookie createCookie = new Cookie("accessToken", tokenDTO.getAccessToken());
-
 			createCookie.setMaxAge(5 * 60 * 60); // 시간 분 초
 			createCookie.setPath("/");
 			response.addCookie(createCookie);

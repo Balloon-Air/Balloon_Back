@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import com.balloon.entity.Unit;
 
 @Repository
-public interface UnitRepository extends JpaRepository<Unit, String>{
-	
+public interface UnitRepository extends JpaRepository<Unit, String> {
+
 	public Unit findUnitByUnitCode(String unitCode);
-	
+
 	public void deleteUnitByUnitCode(String unitCode);
 }

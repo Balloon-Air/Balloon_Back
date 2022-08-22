@@ -61,7 +61,7 @@ public class BusinessReport {
 	private String position;
 
 	@CreatedDate
-	@Column(name = "write_date")
+	@Column(name = "write_date", updatable = false)
 	private LocalDateTime writeDate;
 
 	@LastModifiedDate
@@ -87,9 +87,8 @@ public class BusinessReport {
 		BizRptDTO bizRptDTO = BizRptDTO.builder().businessReportId(businessReport.getBusinessReportId())
 				.documentTitle(businessReport.getDocumentTitle()).documentContent(businessReport.getDocumentContent())
 				.documentStatus(businessReport.getDocumentStatus()).empName(businessReport.getEmpName())
-				.position(businessReport.getPosition()).writeDate(businessReport.getWriteDate())
-				.updateDate(businessReport.getUpdateDate()).unit(businessReport.getUnit()).emp(businessReport.getEmp())
-				.build();
+				.position(businessReport.getPosition()).updateDate(businessReport.getUpdateDate())
+				.unit(businessReport.getUnit()).emp(businessReport.getEmp()).build();
 
 		return bizRptDTO;
 	}

@@ -49,36 +49,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
 
-		http.authorizeRequests()
-//                .antMatchers("/", "/**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/**").permitAll()
 //                .antMatchers("/").hasRole("MANAGER")
-
-				.antMatchers(HttpMethod.POST, "/auth/login").permitAll().antMatchers(HttpMethod.POST, "/auth/signup")
-				.permitAll()
-
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
-				.antMatchers(HttpMethod.POST, "/api/cal/**").permitAll().antMatchers(HttpMethod.GET, "/api/emp/list/**")
-				.permitAll().antMatchers(HttpMethod.GET, "/api/emp/**").permitAll().antMatchers("/api/emp/unit/**")
-				.permitAll()
 
-				.antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
-
-				.antMatchers(HttpMethod.GET, "/allChatroom").permitAll().antMatchers("/createChatroom").permitAll()
-				.antMatchers("/chat/**").permitAll().antMatchers("/allChat/**").permitAll().antMatchers("/topic/**")
-				.permitAll().antMatchers("/app/**").permitAll().antMatchers("/chatstart/**").permitAll()
-				.antMatchers("/deleteChatroom/**").permitAll().antMatchers("/**").permitAll()
-
-				.antMatchers(HttpMethod.POST, "/api/cal/**").permitAll().antMatchers(HttpMethod.GET, "/api/cal/**")
-				.permitAll()
-
-				.antMatchers("/**").permitAll()
-
-				.antMatchers("/api/emp/me").authenticated()
-
-				.antMatchers("/api/**").authenticated()
-
-//                .anyRequest().authenticated()
-		;
+				.antMatchers(HttpMethod.POST, "/auth/login").permitAll().antMatchers(HttpMethod.GET, "/api/unit/**")
+				.permitAll().antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")
+				.antMatchers(HttpMethod.POST, "/api/unitlist").hasRole("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/unit/**").hasRole("ADMIN").anyRequest().authenticated();
 
 		http.logout().permitAll();
 

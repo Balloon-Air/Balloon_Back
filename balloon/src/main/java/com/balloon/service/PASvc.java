@@ -16,4 +16,6 @@ public interface PASvc {
 
 	public void deletePAByPAId(String personnelAppointmentId);
 
+	public PADTO getPAWD();
+
 }

@@ -12,9 +12,11 @@ public interface BizTpSvc {
 
 	public List<DocVO> getDocbyUnitCode(String unitCode);
 
-	BizTpDTO getBizTpByBizTpId(String businessTripId);
+	public BizTpDTO getBizTpByBizTpId(String businessTripId);
 
 	public void deleteBizTpByBizTpId(String businessTripId);
+
+	public BizTpDTO getBizTpWD();
 
 //	public BizTpDTO getBizTpByEmpId(String empId);
 

@@ -14,6 +14,8 @@ import com.balloon.entity.Employee;
 @Repository
 public interface EmpRepository extends JpaRepository<Employee, String> {
 
+//	public void saveAll(List<Employee> employees);
+
 	public Employee findEmpByEmpId(String empId);
 
 	@Query(value = "SELECT *  " + "FROM employee e " + "WHERE unit_code " + "IN ( SELECT u.unit_code " + "FROM unit u "

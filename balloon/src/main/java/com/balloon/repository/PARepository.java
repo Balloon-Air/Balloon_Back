@@ -19,4 +19,6 @@ public interface PARepository
 
 	public List<PersonnelAppointment> findPersonnelAppointmentIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(
 			String unitCode, Byte documentStatus);
+
+	public PersonnelAppointment findTopByOrderByWriteDateDesc();
 }

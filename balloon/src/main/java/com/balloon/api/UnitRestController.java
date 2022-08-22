@@ -1,11 +1,11 @@
 package com.balloon.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.UnitDTO;
-import com.balloon.entity.Unit;
 import com.balloon.service.UnitServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"}, allowedHeaders = "*")
+@CrossOrigin(origins = { "http://localhost:3000" }, allowedHeaders = "*")
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
@@ -97,6 +96,20 @@ public class UnitRestController {
 		}
 	}
 
+	@PostMapping(value = "/unitlist", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean insertUnitList(@Valid @RequestBody List<UnitDTO> unitDtoList) {
+		try {
+			if (unitDtoList == null) {
+				throw new Exception("입력받은 값이 없습니다.");
+			}
+			boolean insertChk = unitSvc.insertUnitList(unitDtoList);
+			return insertChk;
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
 	@PutMapping(value = "/unit", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateUnit(@RequestBody UnitDTO unitDTO) throws Exception {
 		try {
@@ -120,6 +133,8 @@ public class UnitRestController {
 			if (unitCode == null) {
 				throw new Exception("입력받은 조직번호가 없습니다.");
 			}
+			System.out.println("111111111111111111111111111111111111111111111111111111");
+			System.out.println(unitCode);
 			UnitDTO unitDTO = new UnitDTO();
 			unitDTO = findUnitByUnitCode(unitCode);
 			if (unitDTO == null) {

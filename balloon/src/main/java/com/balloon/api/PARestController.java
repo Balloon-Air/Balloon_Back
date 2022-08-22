@@ -1,6 +1,7 @@
 package com.balloon.api;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,18 +26,18 @@ public class PARestController {
 	// CREATE -------------------------------
 	@PostMapping(value = "/pa", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertPA(@RequestBody PADTO paDTO) {
-		paDTO.setPersonnelAppointmentId(paDTO.getPersonnelAppointmentId());
-		paDTO.setDocumentTitle(paDTO.getDocumentTitle());
-		paDTO.setDocumentContent(paDTO.getDocumentContent());
-		paDTO.setDocumentStatus((byte) 1);
-		paDTO.setPersonnelDate(paDTO.getPersonnelDate());
-		paDTO.setPosition(paDTO.getPosition());
-		paDTO.setUnitName(paDTO.getUnitName());
-		paDTO.setMovedEmpName(paDTO.getMovedEmpName());
-		paDTO.setEmpName(paDTO.getEmpName());
-		paDTO.setMovedEmpId(paDTO.getMovedEmpId());
-		paDTO.setEmp(paDTO.getEmp());
-		paDTO.setUnit(paDTO.getUnit());
+//		paDTO.setPersonnelAppointmentId(paDTO.getPersonnelAppointmentId());
+//		paDTO.setDocumentTitle(paDTO.getDocumentTitle());
+//		paDTO.setDocumentContent(paDTO.getDocumentContent());
+//		paDTO.setDocumentStatus(paDTO.getDocumentStatus());
+//		paDTO.setPersonnelDate(paDTO.getPersonnelDate());
+//		paDTO.setPosition(paDTO.getPosition());
+//		paDTO.setUnitName(paDTO.getUnitName());
+//		paDTO.setMovedEmpName(paDTO.getMovedEmpName());
+//		paDTO.setEmpName(paDTO.getEmpName());
+//		paDTO.setMovedEmpId(paDTO.getMovedEmpId());
+//		paDTO.setEmp(paDTO.getEmp());
+//		paDTO.setUnit(paDTO.getUnit());
 
 		PASvc.insertPA(paDTO);
 	}
@@ -47,6 +48,11 @@ public class PARestController {
 		return PASvc.getPAByPAId(PAId);
 	}
 
+	@GetMapping(value = "/pa/wd")
+	public PADTO getLatestPA() {
+		return PASvc.getPAWD();
+	}
+
 	// UPDATE -------------------------------
 	@PutMapping(value = "/pa/{PAId}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updataPAByPAId(@PathVariable("PAId") String PAId, @RequestBody PADTO paDTO) {
@@ -55,6 +61,7 @@ public class PARestController {
 	}
 
 	// DELETE -------------------------------
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/pa/{PAId}")
 	public void deletePAByPAId(@PathVariable("PAId") String PAId) {
 		PASvc.deletePAByPAId(PAId);

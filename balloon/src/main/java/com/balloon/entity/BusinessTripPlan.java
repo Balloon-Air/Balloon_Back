@@ -17,7 +17,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.balloon.dto.BizTpDTO;
 import com.balloon.vo.DocVO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,51 +38,41 @@ public class BusinessTripPlan {
 	@Column(name = "business_trip_id", length = 20)
 	private String businessTripId;
 
-	@NotNull
 	@Column(name = "document_title", length = 20)
 	private String documentTitle;
 
-	@NotNull
 	@Column(name = "document_content", length = 2000)
 	private String documentContent;
 
-	@NotNull
 	@Column(name = "document_status", length = 1)
 	private Byte documentStatus;
 
-	@NotNull
 	@Column(name = "start_date")
 	private LocalDateTime startDate;
 
-	@NotNull
 	@Column(name = "end_date")
 	private LocalDateTime endDate;
 
-	@NotNull
 	@Column(name = "destination", length = 40)
 	private String destination;
 
-	@NotNull
 	@Column(name = "visiting_purpose", length = 200)
 	private String visitingPurpose;
 
-	@NotNull
 	@Column(name = "emp_name", length = 30)
 	private String empName;
 
-	@NotNull
 	@Column(name = "position", length = 20)
 	private String position;
 
 	@CreatedDate
-	@Column(name = "write_date")
+	@Column(name = "write_date", updatable = false)
 	private LocalDateTime writeDate;
 
 	@LastModifiedDate
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
-	@NotNull
 	@Column(name = "unit_name", length = 20)
 	private String unitName;
 

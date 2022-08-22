@@ -5,11 +5,14 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.ApvlDTO;
@@ -33,6 +36,7 @@ import lombok.ToString;
 public class ApprovalList {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "approval_id")
 	private Integer approvalId;
 
@@ -40,8 +44,8 @@ public class ApprovalList {
 	@Column(name = "approval_status", length = 1)
 	private Byte approvalStatus;
 
-	@Column(name = "approval_content", length = 200)
-	private String approvalContent;
+	@Column(name = "approval_comment", length = 200)
+	private String approvalComment;
 
 	@NotNull
 	@Column(name = "approver_name", length = 30)
@@ -55,6 +59,7 @@ public class ApprovalList {
 	@Column(name = "drafter_name", length = 30)
 	private String drafterName;
 
+	@LastModifiedDate
 	@Column(name = "process_date")
 	private LocalDateTime processDate;
 
@@ -62,31 +67,31 @@ public class ApprovalList {
 	@ManyToOne(targetEntity = Employee.class)
 	@NotNull
 	@JoinColumn(name = "emp_id")
-	private String empId;
+	private Employee emp;
 
 	@JsonIgnore
 	@ManyToOne(targetEntity = BusinessReport.class)
 	@JoinColumn(name = "business_report_id")
-	private String businessReportId;
+	private BusinessReport businessReport;
 
 	@JsonIgnore
 	@ManyToOne(targetEntity = BusinessTripPlan.class)
 	@JoinColumn(name = "business_trip_id")
-	private String businessTripId;
+	private BusinessTripPlan businessTrip;
 
 	@JsonIgnore
 	@ManyToOne(targetEntity = PersonnelAppointment.class)
 	@JoinColumn(name = "personnel_appointment_id")
-	private String personnelAppointmentId;
+	private PersonnelAppointment personnelAppointment;
 
 	public ApvlDTO toDTO(ApprovalList approvalList) {
 		ApvlDTO apvlDTO = ApvlDTO.builder().approvalId(approvalList.getApprovalId())
-				.approvalStatus(approvalList.getApprovalStatus()).approvalContent(approvalList.getApprovalContent())
+				.approvalStatus(approvalList.getApprovalStatus()).approvalComment(approvalList.getApprovalComment())
 				.approverName(approvalList.getApproverName()).position(approvalList.getPosition())
 				.drafterName(approvalList.getDrafterName()).processDate(approvalList.getProcessDate())
-				.empId(approvalList.getEmpId()).businessReportId(approvalList.getBusinessReportId())
-				.businessTripId(approvalList.getBusinessTripId())
-				.personnelAppointmentId(approvalList.getPersonnelAppointmentId()).build();
+				.emp(approvalList.getEmp()).businessReport(approvalList.getBusinessReport())
+				.businessTrip(approvalList.getBusinessTrip())
+				.personnelAppointment(approvalList.getPersonnelAppointment()).build();
 		return apvlDTO;
 	}
 

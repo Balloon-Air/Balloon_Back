@@ -52,7 +52,7 @@ public class BizRptSvcImpl implements BizRptSvc {
 	@Override
 	public List<DocVO> getDocbyUnitCode(String unitCode) {
 		String code = unitCode.substring(0, 4);
-		Byte status = 5;
+		Byte status = 2;
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<BusinessReport> businessReportsList = bizRptRepo
 				.findBusinessReportIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(code,
@@ -73,6 +73,13 @@ public class BizRptSvcImpl implements BizRptSvc {
 	@Override
 	public void deleteBizRptByBizRptId(String bizRptId) {
 		bizRptRepo.deleteById(bizRptId);
+	}
+
+	@Override
+	public BizRptDTO getBizRptWD() {
+		BusinessReport businessReport = bizRptRepo.findTopByOrderByWriteDateDesc();
+		BizRptDTO bizRptDTO = businessReport.toDTO(businessReport);
+		return bizRptDTO;
 	}
 
 }

@@ -50,6 +50,22 @@ public class UnitServiceImpl implements UnitService {
 
 	@Transactional
 	@Override
+	public boolean insertUnitList(List<UnitDTO> requestDtoList) {
+
+		if (requestDtoList != null) {
+			List<Unit> unitList = new ArrayList<Unit>();
+
+			requestDtoList.forEach(unitDTO -> unitList.add(unitDTO.toEntity(unitDTO)));
+
+			unitRepo.saveAll(unitList);
+
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional
+	@Override
 	public void updateUnit(UnitDTO unitDTO) {
 		/* 부서의 모든 정보를 수정할 때 */
 		Unit unitEntity = unitDTO.toEntity(unitDTO);

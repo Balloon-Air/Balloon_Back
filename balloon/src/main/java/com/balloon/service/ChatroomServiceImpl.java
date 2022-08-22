@@ -1,5 +1,6 @@
 package com.balloon.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -35,6 +36,16 @@ public class ChatroomServiceImpl implements ChatroomService {
 	public Long getCreateChatroom(ChatroomDTO chatroomDTO) {
 		Chatroom chatroomEntity = chatroomDTO.toEntity(chatroomDTO);
 		return chatroomRepository.save(chatroomEntity).getChatroomId();
+	}
+
+	@Override
+	@Transactional
+	public List<Chatroom> getCreateSchroom(List<ChatroomDTO> chatroomDTO) {
+		List<Chatroom> chatroomEntity = new ArrayList<Chatroom>();
+		for (ChatroomDTO chatroomDto : chatroomDTO) {
+			chatroomEntity.add(chatroomDto.toEntity(chatroomDto));
+		}
+		return chatroomRepository.saveAll(chatroomEntity);
 	}
 
 	@Override

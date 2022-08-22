@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,14 +23,14 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class CalRestController {
-	@Autowired
+//	@Autowired
+
 	private final CalServiceImpl calService;
 	// 캘린더
 
 	@GetMapping(value = "/cal/list")
-
 	public List<CalDTO> findAll() {
 
 		return calService.findAll();

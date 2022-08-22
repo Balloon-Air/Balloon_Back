@@ -18,4 +18,6 @@ public interface BizRptSvc {
 
 	public void deleteBizRptByBizRptId(String businessReportId);
 
+	public BizRptDTO getBizRptWD();
+
 }

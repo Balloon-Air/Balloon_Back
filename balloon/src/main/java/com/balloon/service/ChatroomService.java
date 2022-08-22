@@ -13,7 +13,10 @@ public interface ChatroomService {
 
 	public Long getCreateChatroom(ChatroomDTO chatroomDTO);
 
+	public List<Chatroom> getCreateSchroom(List<ChatroomDTO> chatroomDTO);
+
 	public void getUpdateChatroom(ChatroomDTO chatroomDTO);
 
 	public void deleteChatroom(Long chatroomId);
+
 }

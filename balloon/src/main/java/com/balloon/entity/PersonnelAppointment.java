@@ -73,7 +73,7 @@ public class PersonnelAppointment {
 	private String empName;
 
 	@CreatedDate
-	@Column(name = "write_date")
+	@Column(name = "write_date", updatable = false)
 	private LocalDateTime writeDate;
 
 	@LastModifiedDate
