@@ -41,7 +41,7 @@ public interface EmpRepository extends JpaRepository<Employee, String> {
 			+ "											        WHERE uu.unit_code = ( SELECT ee.unit_code FROM employee ee "
 			+ "																          WHERE ee.emp_id = :empId) "
 			+ "										) " + "					) AND e.emp_id != :empId "
-			+ "	   ORDER BY e.emp_name ASC;", nativeQuery = true)
+			+ "	   ORDER BY e.unit_code, e.emp_name ASC;", nativeQuery = true)
 	public List<Employee> findEmpListOnSameParentCode(@Param("empId") String empId);
 
 }

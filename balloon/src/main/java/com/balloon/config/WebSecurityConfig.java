@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @Component
-//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
 public class WebSecurityConfig implements WebMvcConfigurer {
 
 	private final TokenProvider tokenProvider;
@@ -42,21 +41,20 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 				.csrf().disable().sessionManagement(session -> session.maximumSessions(2).maxSessionsPreventsLogin(true)
 						.expiredUrl("/login?exprie=true"))
-
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		;
 
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
 
-		http.authorizeRequests().antMatchers("/", "/**").permitAll()
-//                .antMatchers("/").hasRole("MANAGER")
-//                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
 
+		http.authorizeRequests()
+    
 				.antMatchers(HttpMethod.POST, "/auth/login").permitAll().antMatchers(HttpMethod.GET, "/api/unit/**")
 				.permitAll().antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")
 				.antMatchers(HttpMethod.POST, "/api/unitlist").hasRole("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/unit/**").hasRole("ADMIN").anyRequest().authenticated();
+				.antMatchers(HttpMethod.DELETE, "/api/unit/**").hasRole("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN").anyRequest().authenticated();
 
 		http.logout().permitAll();
 

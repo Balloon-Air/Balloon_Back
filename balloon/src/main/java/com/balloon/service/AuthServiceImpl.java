@@ -21,13 +21,14 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+
 public class AuthServiceImpl implements AuthService {
 	private final AuthenticationManagerBuilder managerBuilder;
 	private final EmpRepository empRepo;
 	private final PasswordEncoder passwordEncoder;
 	private final TokenProvider tokenProvider;
 
+	@Transactional
 	@Override
 	public EmpResponseDTO signup(EmpRequestDTO requestDto) {
 		System.out.println(requestDto.getEmpId());
@@ -40,6 +41,7 @@ public class AuthServiceImpl implements AuthService {
 
 	}
 
+	@Transactional
 	@Override
 	public boolean signupList(List<EmpRequestDTO> requestDtoList) {
 
@@ -67,6 +69,7 @@ public class AuthServiceImpl implements AuthService {
 		return false;
 	}
 
+	@Transactional
 	@Override
 	public TokenDTO login(EmpRequestDTO requestDto) {
 		UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();

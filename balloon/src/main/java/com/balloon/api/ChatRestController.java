@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.ChatDTO;
+import com.balloon.dto.EmpDTO;
 import com.balloon.entity.Employee;
 import com.balloon.service.ChatServiceImpl;
 import com.balloon.service.EmpServiceImpl;
@@ -25,8 +26,8 @@ public class ChatRestController {
 	private final ChatServiceImpl chatServiceImpl;
 
 	@GetMapping(value = "/allEmp")
-	public List<Employee> allEmp() {
-		return empSvc.getEmp();
+	public List<EmpDTO> allEmp() {
+		return empSvc.findEmps();
 	}
 
 	@GetMapping(value = "/allChat/{empId}")

@@ -40,6 +40,17 @@ public class EmpServiceImpl implements EmpService {
 
 	@Transactional(readOnly = true)
 	@Override
+	public EmpDTO findEmpByEmpId(String empId) throws Exception {
+		Employee empEntity = empRepo.findEmpByEmpId(empId);
+		if (empEntity == null) {
+			throw new Exception("사원 정보가 존재하지 않습니다.");
+		} else {
+			return empEntity.toDTO(empEntity);
+		}
+	}
+
+	@Transactional(readOnly = true)
+	@Override
 	public List<EmpDTO> findEmps() {
 		List<Employee> empEntityList = empRepo.findAll();
 		List<EmpDTO> empDTOList = new ArrayList<EmpDTO>();
@@ -51,49 +62,21 @@ public class EmpServiceImpl implements EmpService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public Employee findEmpByEmpId(String empId) {
-		return empRepo.findEmpByEmpId(empId);
-	}
-
-	/**/
-	@Transactional(readOnly = true)
 	public EmpResponseDTO getMyInfoBySecurity() {
 		if (SecurityUtil.getCurrentEmpId() == null) {
 			throw new RuntimeException("로그인 유저 정보가 없습니다.");
 		}
 
 		return empRepo.getByEmpId(SecurityUtil.getCurrentEmpId());
-
 	}
 
-	@Transactional
-	public EmpResponseDTO changeEmpName(String empId, String empName) {
-		Employee employee = empRepo.findEmpByEmpId(empId);
-		if (employee == null) {
-			throw new RuntimeException("로그인 유저 정보가 없습니다.");
-		}
-		employee.updateEmpName(empName);
-		return EmpResponseDTO.of(empRepo.save(employee));
-	}
-
-	@Transactional
-	public EmpResponseDTO changePassword(String empId, String exPasssword, String newPassword) {
-		Employee employee = empRepo.findEmpByEmpId(empId);
-		if (employee == null) {
-			throw new RuntimeException("로그인 유저 정보가 없습니다.");
-		}
-		if (!passwordEncoder.matches(exPasssword, employee.getPassword())) {
-			throw new RuntimeException("비밀번호가 맞지 않습니다.");
-		}
-		employee.updatePassword(passwordEncoder.encode(newPassword));
-		return EmpResponseDTO.of(empRepo.save(employee));
-	}
-
+	@Transactional(readOnly = true)
 	@Override
 	public List<Employee> findEmpListInUnitCode(String unitCode) {
 		return empRepo.findEmpListInUnitCode(unitCode);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<EmpDTO> findEmpListInSameUnit(String empId) {
 
@@ -109,25 +92,35 @@ public class EmpServiceImpl implements EmpService {
 
 	}
 
+	@Transactional
 	@Override
 	public void deleteByEmpId(String empId) {
 		empRepo.deleteById(empId);
 	}
 
-	/* site 참조 */
-//	@Transactional(readOnly = true)
-//	public EmpDTO getEmpInfo(String empId) {
-//		return empRepo.findByEmpId(empId)
-//				.map(EmpDTO::isEmpty)
-//				.orElseThrow(() -> new RuntimeException("유저정보가 없습니다."));
-//				
-//	}
-//	
-
-	/* site 참조 */
-
+	@Transactional
 	@Override
-	public List<Employee> getEmp() {
-		return empRepo.findAll();
+	public EmpResponseDTO changeEmpName(String empId, String empName) {
+		Employee employee = empRepo.findEmpByEmpId(empId);
+		if (employee == null) {
+			throw new RuntimeException("로그인 유저 정보가 없습니다.");
+		}
+		employee.updateEmpName(empName);
+		return EmpResponseDTO.of(empRepo.save(employee));
 	}
+
+	@Transactional
+	@Override
+	public EmpResponseDTO changePassword(String empId, String exPasssword, String newPassword) {
+		Employee employee = empRepo.findEmpByEmpId(empId);
+		if (employee == null) {
+			throw new RuntimeException("로그인 유저 정보가 없습니다.");
+		}
+		if (!passwordEncoder.matches(exPasssword, employee.getPassword())) {
+			throw new RuntimeException("비밀번호가 맞지 않습니다.");
+		}
+		employee.updatePassword(passwordEncoder.encode(newPassword));
+		return EmpResponseDTO.of(empRepo.save(employee));
+	}
+
 }

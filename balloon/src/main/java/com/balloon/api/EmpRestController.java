@@ -27,14 +27,14 @@ import com.balloon.service.EmpServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/employee")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
+//@CrossOrigin(origins = { "http://localhost:3000" })
 public class EmpRestController {
 
 	private final EmpServiceImpl empSvc;
 
-	@GetMapping("/emp/list")
+	@GetMapping("/list")
 	public PageResultDTO<EmpDTO, Employee> findEmpList(PageRequestDTO pageRequestDTO) throws Exception {
 		try {
 			if (pageRequestDTO == null) {
@@ -49,26 +49,24 @@ public class EmpRestController {
 		}
 	}
 
-	@GetMapping("/emp/emps")
-	public List<EmpDTO> findEmps() {
+	@GetMapping("/emps")
+	public List<EmpDTO> findEmps() throws Exception {
 
 		List<EmpDTO> empDTOList = empSvc.findEmps();
-
-		return empDTOList;
+		if (empDTOList == null) {
+			throw new Exception("리스트 값이 없습니다.");
+		} else {
+			return empDTOList;
+		}
 	};
 
-	@GetMapping(value = "/emp/{empId}")
+	@GetMapping(value = "/{empId}")
 	public EmpDTO findEmpByEmpId(@Valid @PathVariable String empId) throws Exception {
 		try {
 			if (empId == null) {
 				throw new Exception("사원번호를 입력받지 못했습니다.");
 			} else {
-				Employee empEntity = empSvc.findEmpByEmpId(empId);
-				if (empEntity == null) {
-					throw new Exception("사원번호가 존재하지 않습니다.");
-				} else {
-					return empEntity.toDTO(empEntity);
-				}
+				return empSvc.findEmpByEmpId(empId);
 			}
 		} catch (Exception e) {
 			throw new Exception("입력받은 사원번호가 없습니다.");
@@ -76,11 +74,15 @@ public class EmpRestController {
 	}
 
 	/**/
-	@GetMapping("/emp/me")
-	public EmpResponseDTO getMyEmpInfo() {
+	@GetMapping("/me")
+	public EmpResponseDTO getMyEmpInfo() throws Exception {
 		EmpResponseDTO myInfoBySecurity = empSvc.getMyInfoBySecurity();
 
-		return myInfoBySecurity;
+		if (myInfoBySecurity == null) {
+			throw new Exception("로그인 된 사원의 정보가 없습니다.");
+		} else {
+			return myInfoBySecurity;
+		}
 	}
 
 	@PostMapping("/empName")
@@ -102,7 +104,6 @@ public class EmpRestController {
 			} else {
 				List<Employee> empEntityList = empSvc.findEmpListInUnitCode(unitCode);
 				if (empEntityList == null) {
-//					throw new Exception("사원이 존재하지 않습니다.");
 					return null;
 				} else {
 					List<EmpDTO> empDTOList = new ArrayList<EmpDTO>();
@@ -118,7 +119,7 @@ public class EmpRestController {
 
 	}
 
-	@GetMapping("/emp/unit/list/{empId}")
+	@GetMapping("/unit/list/{empId}")
 	public List<EmpDTO> findEmpListInSameUnit(@Valid @PathVariable String empId) throws Exception {
 		try {
 			if (empId == null) {
@@ -133,8 +134,8 @@ public class EmpRestController {
 		}
 	}
 
-	// delete
-	@DeleteMapping("/emp/delete/{empId}")
+	@CrossOrigin(origins = { "http://localhost:3000" })
+	@DeleteMapping("/{empId}")
 	public void deleteByEmpId(@Valid @PathVariable String empId) {
 		try {
 			if (empId == null) {
@@ -146,53 +147,5 @@ public class EmpRestController {
 			e.getMessage();
 		}
 	}
-
-//	  private UserMapper userMapper;
-//	  private Bcrypt bcrypt;
-//
-//	  public EmpRestController(UserMapper userMapper, Bcrypt bcrypt) {
-//	    this.userMapper = userMapper;
-//	    this.bcrypt = bcrypt;
-//	  }
-//
-//	  // create
-//	  @PostMapping("/user") 
-//	  public ResponseEntity<Map<String,String>> CreateUser(@RequestBody User req) {
-//	    String hashpassword = bcrypt.HashPassword(req.getPassword());
-//	    req.setPassword(hashpassword);
-//	    userMapper.Create(req);
-//	    Map<String,String> map = new HashMap<>();
-//	    map.put("result", "success");
-//
-//	    return new ResponseEntity<>(map, HttpStatus.OK);
-//	  }
-//
-//	  // read
-//	  @GetMapping("/users")
-//	  public List<User> AllUser() {
-//	    return userMapper.findAll();
-//	  }
-//
-//	  // update
-//	  @PostMapping("/update") 
-//	  public ResponseEntity<Map<String,String>> UpdateUser(@RequestBody User req) {
-//	    userMapper.Update(req);
-//	    
-//	    Map<String,String> map = new HashMap<>();
-//	    map.put("result", "success");
-//
-//	    return new ResponseEntity<>(map, HttpStatus.OK);
-//	  }
-//
-//	
-//
-//
-//	  @GetMapping("/hello") // get /api/hello
-//	  public ResponseEntity<Map<String,String>> Hello() { // ResponseEntity 리턴타입 Map 키와 값을 하나의 쌍으로 저장
-//	    Map<String,String> map = new HashMap<>(); // map 선언, HashMap은 Map 인터페이스를 구현한 대표적인 Map 컬렉션
-//	    map.put("result", "hello world"); // map에 값 넣기
-//
-//	    return new ResponseEntity<>(map, HttpStatus.OK); // 생성자로 ResponseEntity를 만들어서 map이랑 status클라이언트에 보내줌
-//	  }
 
 }
