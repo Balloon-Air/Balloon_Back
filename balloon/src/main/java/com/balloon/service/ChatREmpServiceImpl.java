@@ -75,32 +75,8 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 	@Override
 	@Transactional
 	public Employee getInsertSchChat(ChatroomEmployeeDTO chatroomEmployeeDTO) {
-
-//		ChatroomDTO chatroomDTO = new ChatroomDTO();
-//		Chatroom chatroomEntity = chatroomDTO.toEntity(chatroomDTO);
-//
-//		EmpDTO empDTO = new EmpDTO();
-//		Employee empEntity = empDTO.toEntity(empDTO);
-
 		ChatroomEmployee chatroomEmployeeEntity = chatroomEmployeeDTO.toEntity(chatroomEmployeeDTO);
 		return chatREmpRepository.save(chatroomEmployeeEntity).getEmpId();
-
-//		ChatroomEmployee chatroomEmployeeEntity = chatroomEmployeeDTO.toEntity(chatroomEmployeeDTO);
-//		Employee emp = chatREmpRepository.save(chatroomEmployeeEntity).getEmpId();
-//		if (emp != null) {
-//			Chatroom chatroomId = chatroomRepository.findById(chatroomEmployeeDTO.getChatroomId().getChatroomId())
-//					.get();
-//			ChatroomDTO chatroomDTO = new ChatroomDTO();
-//			chatroomDTO.setChatroomId(chatroomId.getChatroomId());
-//			chatroomDTO.setChatroomName(chatroomId.getChatroomName());
-//			chatroomDTO.setHeadCount(chatroomId.getHeadCount());
-//
-//			chatroomRepository.save(chatroomDTO.toEntity(chatroomDTO));
-//			System.out.println(chatroomDTO);
-//			System.out.println(chatroomEmployeeDTO);
-//		}
-
-//		return null;
 	}
 
 	@Override

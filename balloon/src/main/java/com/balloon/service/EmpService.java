@@ -25,6 +25,8 @@ public interface EmpService {
 	// 같은 조직내 사원 출력
 	public List<Employee> findEmpListInUnitCode(String unitCode);
 
+	public List<EmpDTO> findApvrListInSameUnit(String empId);
+
 	// 상위 조직이 있으면 상위조직의 사원까지 출력 (팀이면 조직까지)
 	public List<EmpDTO> findEmpListInSameUnit(String empId);
 

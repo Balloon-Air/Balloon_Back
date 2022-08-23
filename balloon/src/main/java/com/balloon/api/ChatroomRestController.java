@@ -19,49 +19,49 @@ import com.balloon.service.ChatroomServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/chatroom")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatroomRestController {
 
-//	@Autowired
-	private final ChatroomServiceImpl chatroomServiceImpl;
+	private final ChatroomServiceImpl chatroomSvc;
 
 	// 채팅방 목록 조회
-	@GetMapping(value = "/allChatroom")
+	@GetMapping(value = "/allchatroom")
 	public List<Chatroom> allChatroom() {
-		return chatroomServiceImpl.getAllChatroom();
+		return chatroomSvc.getAllChatroom();
 	}
 
 	// 채팅방 조회
-	@GetMapping(value = "/oneChatroom/{chatroomId}")
-	public Chatroom oneChatroom(@PathVariable Long chatroomId) {
-		return chatroomServiceImpl.getOneChatroom(chatroomId);
+	@GetMapping(value = "/onechatroom/{chatroomId}")
+	public Chatroom onechatroom(@PathVariable Long chatroomId) {
+		return chatroomSvc.getOneChatroom(chatroomId);
 	}
 
 	// 채팅방 개설
-	@PostMapping(value = "/createChatroom")
-	public Long createChatroom(@RequestBody ChatroomDTO chatroomDTO) {
+	@PostMapping(value = "/createchatroom")
+	public Long createchatroom(@RequestBody ChatroomDTO chatroomDTO) {
 		System.out.println(chatroomDTO);
-		return chatroomServiceImpl.getCreateChatroom(chatroomDTO);
+		return chatroomSvc.getCreateChatroom(chatroomDTO);
 	}
+
 
 	// 일정을 공유할 사원만큼 채팅방을 생성하는 코드
-	@PostMapping(value = "/createSchChatroom")
-	public List<Chatroom> createSchChatroom(@RequestBody List<ChatroomDTO> chatroomDTO) {
-		System.out.println(chatroomDTO);
-		return chatroomServiceImpl.getCreateSchroom(chatroomDTO);
+	@PostMapping(value = "/createschchatroom")
+	public List<Chatroom> createSchChatroom(@RequestBody List<ChatroomDTO> chatroomDTOList) {
+		System.out.println(chatroomDTOList);
+		return chatroomSvc.getCreateSchroom(chatroomDTOList);
 	}
 
-	@PutMapping(value = "/updateroom/{chatroomId}")
+	@PutMapping(value = "/updatechatroom/{chatroomId}")
 	public void updateChatroom(@PathVariable(value = "chatroomId") Long chatroomId,
 			@RequestBody ChatroomDTO chatroomDTO) {
 		chatroomDTO.setChatroomId(chatroomId);
-		chatroomServiceImpl.getUpdateChatroom(chatroomDTO);
+		chatroomSvc.getUpdateChatroom(chatroomDTO);
 	}
 
-	@DeleteMapping(value = "/deleteChatroom/{chatroomId}")
+	@DeleteMapping(value = "/deletechatroom/{chatroomId}")
 	public void deleteChatroom(@PathVariable Long chatroomId) {
-		chatroomServiceImpl.deleteChatroom(chatroomId);
+		chatroomSvc.deleteChatroom(chatroomId);
 	}
 }

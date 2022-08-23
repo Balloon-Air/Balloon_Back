@@ -1,5 +1,8 @@
 package com.balloon.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -23,24 +26,33 @@ public class ApvlSvcImpl implements ApvlSvc {
 	}
 
 	@Override
-	public ApvlDTO getApvlByBizRptId(String docId) {
-		ApprovalList approvalList = ApvlRepo.findApprovalListByBusinessReportBusinessReportId(docId);
-		ApvlDTO apvlDTO = approvalList.toDTO(approvalList);
-		return apvlDTO;
+	public List<ApvlDTO> getApvlByBizRptId(String docId) {
+		List<ApvlDTO> apvlDTOList = new ArrayList<ApvlDTO>();
+		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByBusinessReportBusinessReportId(docId);
+		for (ApprovalList approvalList : approvalLists) {
+			apvlDTOList.add(approvalList.toDTO(approvalList));
+		}
+		return apvlDTOList;
 	}
 
 	@Override
-	public ApvlDTO getApvlByBizTpId(String docId) {
-		ApprovalList approvalList = ApvlRepo.findApprovalListByBusinessTrip(docId);
-		ApvlDTO apvlDTO = approvalList.toDTO(approvalList);
-		return apvlDTO;
+	public List<ApvlDTO> getApvlByBizTpId(String docId) {
+		List<ApvlDTO> apvlDTOList = new ArrayList<ApvlDTO>();
+		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByBusinessTrip(docId);
+		for (ApprovalList approvalList : approvalLists) {
+			apvlDTOList.add(approvalList.toDTO(approvalList));
+		}
+		return apvlDTOList;
 	}
 
 	@Override
-	public ApvlDTO getApvlByPAId(String docId) {
-		ApprovalList approvalList = ApvlRepo.findApprovalListByPersonnelAppointment(docId);
-		ApvlDTO apvlDTO = approvalList.toDTO(approvalList);
-		return apvlDTO;
+	public List<ApvlDTO> getApvlByPAId(String docId) {
+		List<ApvlDTO> apvlDTOList = new ArrayList<ApvlDTO>();
+		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByPersonnelAppointment(docId);
+		for (ApprovalList approvalList : approvalLists) {
+			apvlDTOList.add(approvalList.toDTO(approvalList));
+		}
+		return apvlDTOList;
 	}
 
 	@Override

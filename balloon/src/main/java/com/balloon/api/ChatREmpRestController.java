@@ -21,35 +21,30 @@ import com.balloon.service.ChatREmpServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/cre")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatREmpRestController {
 
 	private final ChatREmpServiceImpl chatREmpServicImpl;
 
-	@GetMapping(value = "/allChatEmp")
+	@GetMapping(value = "/allchatemp")
 	public List<ChatroomEmployee> allChatEmp() {
 		return chatREmpServicImpl.getallChatEmp();
 	}
 
-	@GetMapping(value = "/oneChatEmp/{chatroomId}")
+	@GetMapping(value = "/onechatemp/{chatroomId}")
 	public List<ChatroomEmployee> chatroomEmp(@PathVariable(value = "chatroomId") Long chatroomId) {
 		return chatREmpServicImpl.getChatroomEmp(chatroomId);
 	}
 
-	@PostMapping(value = "/botChatroom", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/botchatroom", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public List<ChatroomEmployee> calendarBot(@RequestBody List<String> empIds) {
 
 		return chatREmpServicImpl.getBotchatroom(empIds);
-//		return null;
 	}
-//	@GetMapping(value = "/botChatroom/{empId}")
-//	public ChatroomEmployee calendarBot(@PathVariable(value = "empId") List<String> empIds) {
-//		return chatREmpServicImpl.getBotchatroom(empIds);
-//	}
 
-	@PostMapping(value = "/insertChatEmp/{chatroomId}")
+	@PostMapping(value = "/insertchatemp/{chatroomId}")
 	public Employee insertChatEmpList(@PathVariable(name = "chatroomId") Long chatroomId,
 			@RequestBody List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
 		// 채팅방 id 값 넣기
@@ -61,27 +56,6 @@ public class ChatREmpRestController {
 			chatroomEmpDto.setChatroomId(chatroomDTO);
 		}
 		return chatREmpServicImpl.getInsertChatEmp(chatroomEmployeeDTO);
-	}
-
-	// 일정등록 시 chatroomEmployee에 만들어진 chatroomId와 empId를 넣어주는 메소드
-	@PostMapping(value = "/insertSch/{chatroomId}")
-	public Employee insertChatEmp(@PathVariable(name = "chatroomId") Long chatroomId,
-			@RequestBody ChatroomEmployeeDTO chatroomEmployeeDTO) {
-
-		ChatroomDTO chatroomDTO = new ChatroomDTO();
-		chatroomDTO.setChatroomId(chatroomId);
-//		EmpDTO empDTO = new EmpDTO();
-//		empDTO.setEmpId(empId);
-		chatroomEmployeeDTO.setChatroomId(chatroomDTO);
-//		ChatroomEmployeeDTO chatroomEmpDTO = new ChatroomEmployeeDTO();
-//		chatroomEmpDTO.setChatroomId(chatroomDTO);
-//		chatroomEmpDTO.setEmpId(empDTO);
-//		System.out.println(chatroomDTO);
-//		System.out.println(chatroomEmpDTO);
-		System.out.println(chatroomEmployeeDTO);
-
-		return chatREmpServicImpl.getInsertSchChat(chatroomEmployeeDTO);
-//		return null;
 	}
 
 	@DeleteMapping(value = "/deleteroom/{chatroomId}/{empId}")

@@ -7,24 +7,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.balloon.service.ChatServiceImpl;
-import com.balloon.vo.MessageDTO;
+import com.balloon.vo.MessageVO;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class MessageController {
-	//특정 broker로 메세지를 전달
+	// 특정 broker로 메세지를 전달
 	private final SimpMessagingTemplate template;
-	private final ChatServiceImpl chatService;
-	
+	private final ChatServiceImpl chatSvc;
+
 	@MessageMapping(value = "/chat/message")
-		public void message(@Payload MessageDTO messageDTO) {
-		System.out.println(messageDTO);
+	public void message(@Payload MessageVO messageVO) {
+		System.out.println(messageVO);
 		System.out.println("연결성공");
-		chatService.insertChat(messageDTO);
-		template.convertAndSend("/topic/message",messageDTO);
+		chatSvc.insertChat(messageVO);
+		template.convertAndSend("/topic/message", messageVO);
 	}
-	
+
 }

@@ -1,5 +1,8 @@
 package com.balloon.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,19 +32,22 @@ public class ApvlRestController {
 
 	// READ ---------------------------------
 	@GetMapping(value = "/apvl/{docId}")
-	public ApvlDTO getApvlByDocId(@PathVariable("docId") String docId) throws Exception {
+	public List<ApvlDTO> getApvlByDocId(@PathVariable("docId") String docId) throws Exception {
+		List<ApvlDTO> list = new ArrayList<ApvlDTO>();
+
 		if (docId.contains("업무기안")) {
-			return ApvlSvc.getApvlByBizRptId(docId);
+			list.addAll(ApvlSvc.getApvlByBizRptId(docId));
 
 		} else if (docId.contains("출장계획")) {
-			return ApvlSvc.getApvlByBizTpId(docId);
+			list.addAll(ApvlSvc.getApvlByBizTpId(docId));
 
 		} else if (docId.contains("인사명령")) {
-			return ApvlSvc.getApvlByPAId(docId);
+			list.addAll(ApvlSvc.getApvlByPAId(docId));
 
 		} else {
 			throw new Exception("없는 문서 입니다.");
 		}
+		return list;
 	}
 
 	// UPDATE -------------------------------

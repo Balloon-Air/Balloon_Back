@@ -10,14 +10,14 @@ public interface CalService {
 
 	public CalDTO getCalByscheduleId(Long scheduleId);
 
-	public void deleteByCalId(Long scheduleId);
+	public List<CalDTO> getCalByempId(String empId);
 
 	public void insertBycal(CalDTO calDTO);
 
+	public void scheduleListAdd(List<CalDTO> calDTOs);
+
 	public void updateByCal(CalDTO requestDTO) throws Exception;
 
-	public List<CalDTO> getCalByempId(String empId);
-
-	public void scheduleListAdd(List<CalDTO> calDTOs);
+	public void deleteByCalId(Long scheduleId);
 
 }

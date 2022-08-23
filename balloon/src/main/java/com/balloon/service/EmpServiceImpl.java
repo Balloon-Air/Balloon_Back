@@ -94,6 +94,21 @@ public class EmpServiceImpl implements EmpService {
 
 	@Transactional
 	@Override
+	public List<EmpDTO> findApvrListInSameUnit(String empId) {
+
+		List<Employee> parentCodeList = empRepo.findApvrListOnParentCode(empId);
+		List<Employee> sameParentCodeList = empRepo.findApvrListOnSameParentCode(empId);
+
+		List<EmpDTO> empDTOList = new ArrayList<EmpDTO>();
+
+		parentCodeList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
+		sameParentCodeList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
+
+		return empDTOList;
+
+	}
+
+	@Override
 	public void deleteByEmpId(String empId) {
 		empRepo.deleteById(empId);
 	}

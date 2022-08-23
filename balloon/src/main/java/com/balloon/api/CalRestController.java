@@ -21,58 +21,56 @@ import com.balloon.service.CalServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/cal")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class CalRestController {
-//	@Autowired
 
-	private final CalServiceImpl calService;
-	// 캘린더
+	private final CalServiceImpl calSvc;
 
-	@GetMapping(value = "/cal/list")
+	@GetMapping(value = "/list")
 	public List<CalDTO> findAll() {
 
-		return calService.findAll();
+		return calSvc.findAll();
 	}
 
-	@GetMapping(value = "/cal/all/{scheduleId}")
+	@GetMapping(value = "/all/{scheduleId}")
 	public CalDTO CalByScheduleId(@PathVariable(name = "scheduleId") Long scheduleid) {
 		System.out.println("스케쥬우우울");
-		return calService.getCalByscheduleId(scheduleid);
+		return calSvc.getCalByscheduleId(scheduleid);
 	}
 
-	@DeleteMapping(value = "/cal/delete/{scheduleId}")
-	public void scheduleIdDelete(@PathVariable(name = "scheduleId") Long scheduleid) {
-		calService.deleteByCalId(scheduleid);
+	@GetMapping(value = "/{empId}")
+	public List<CalDTO> CalByEmpId(@PathVariable(name = "empId") String empId) {
+		System.out.println(empId);
+		return calSvc.getCalByempId(empId);
 	}
 
-	@PostMapping(value = "/cal/insert", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = "/insert", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public void CalByInsert(@Valid @RequestBody CalDTO calDTO) {
 		System.out.println(calDTO);
-		calService.insertBycal(calDTO);
+		calSvc.insertBycal(calDTO);
 	}
 
-	@PostMapping(value = "/cal/schedule", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void scheduleListAdd(@RequestBody List<CalDTO> calDTOs) {
-		calService.scheduleListAdd(calDTOs);
+	@PostMapping(value = "/schedule", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void scheduleListAdd(@RequestBody List<CalDTO> calDTOList) {
+		calSvc.scheduleListAdd(calDTOList);
 	}
 
-	@PutMapping(value = "/cal/update", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PutMapping(value = "/update", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public void updateCalByscheduleId(@RequestBody CalDTO calDTO) {
 		System.out.println(calDTO);
 		try {
-			calService.updateByCal(calDTO);
+			calSvc.updateByCal(calDTO);
 		} catch (Exception e) {
 			System.out.println("에러에러");
 			throw new NullPointerException("scheduleId is null.");
 		}
 	}
 
-	@GetMapping(value = "/cal/{empId}")
-	public List<CalDTO> CalByEmpId(@PathVariable(name = "empId") String empId) {
-		System.out.println("이엠피아이디");
-
-		return calService.getCalByempId(empId);
+	@DeleteMapping(value = "/delete/{scheduleId}")
+	public void scheduleIdDelete(@PathVariable(name = "scheduleId") Long scheduleid) {
+		calSvc.deleteByCalId(scheduleid);
 	}
+
 }

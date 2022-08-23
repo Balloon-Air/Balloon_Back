@@ -4,16 +4,14 @@ import java.util.List;
 
 import com.balloon.dto.ChatDTO;
 import com.balloon.entity.Employee;
-import com.balloon.vo.MessageDTO;
+import com.balloon.vo.MessageVO;
 
 public interface ChatService {
 
 	public List<ChatDTO> getChat(Employee empId);
 
-	public void insertChat(MessageDTO messageDTO);
-
 	public List<ChatDTO> getChatroomId(Long chatroomId);
 
-//	public void getInsertChat(ChatDTO chatDTO);
+	public void insertChat(MessageVO messageVO);
 
 }

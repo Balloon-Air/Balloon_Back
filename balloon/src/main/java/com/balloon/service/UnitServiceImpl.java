@@ -3,9 +3,8 @@ package com.balloon.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.balloon.dto.UnitDTO;
 import com.balloon.entity.Unit;
@@ -19,7 +18,7 @@ public class UnitServiceImpl implements UnitService {
 
 	private final UnitRepository unitRepo;
 
-	@Transactional
+	@Transactional(readOnly = true)
 	@Override
 	public List<UnitDTO> findUnitAll() {
 		List<Unit> unitList = unitRepo.findAll();
@@ -29,7 +28,7 @@ public class UnitServiceImpl implements UnitService {
 		return unitDTOList;
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	@Override
 	public UnitDTO findUnitByUnitCode(String unitCode) throws Exception {
 		Unit unitEntity = unitRepo.findUnitByUnitCode(unitCode);

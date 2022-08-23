@@ -1,15 +1,17 @@
 package com.balloon.service;
 
+import java.util.List;
+
 import com.balloon.dto.ApvlDTO;
 
 public interface ApvlSvc {
 	public void insertApvl(ApvlDTO apvlDTO);
 
-	public ApvlDTO getApvlByBizRptId(String docId);
+	public List<ApvlDTO> getApvlByBizRptId(String docId);
 
-	public ApvlDTO getApvlByBizTpId(String docId);
+	public List<ApvlDTO> getApvlByBizTpId(String docId);
 
-	public ApvlDTO getApvlByPAId(String docId);
+	public List<ApvlDTO> getApvlByPAId(String docId);
 
 	public void deleteApvlByBizRptId(String docId);
 

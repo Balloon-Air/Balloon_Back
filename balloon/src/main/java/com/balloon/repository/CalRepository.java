@@ -23,6 +23,4 @@ public interface CalRepository extends JpaRepository<Cal, Long> {
 	// empId로 스케쥴 찾기
 	public List<Cal> findAllByempId(Employee empId);
 
-//	public List<String> saveAll(Cal calEntity);
-
 }

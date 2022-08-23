@@ -134,8 +134,25 @@ public class EmpRestController {
 		}
 	}
 
+	@GetMapping("/apvr/unit/list/{empId}")
+	public List<EmpDTO> findApvrListInSameUnit(@Valid @PathVariable String empId) throws Exception {
+		try {
+			if (empId == null) {
+				throw new Exception("empId 값이 들어오지 않음.");
+			} else {
+				List<EmpDTO> sameUnitList = empSvc.findApvrListInSameUnit(empId);
+				return sameUnitList;
+			}
+
+		} catch (Exception e) {
+			throw new Exception("터짐.");
+		}
+	}
+
+	// delete
 	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping("/{empId}")
+
 	public void deleteByEmpId(@Valid @PathVariable String empId) {
 		try {
 			if (empId == null) {

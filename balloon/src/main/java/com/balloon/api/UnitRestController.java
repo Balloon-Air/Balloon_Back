@@ -21,23 +21,20 @@ import com.balloon.service.UnitServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/unit")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" }, allowedHeaders = "*")
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
 
-	@GetMapping(value = "/unit/units")
+	@GetMapping(value = "/units")
 	public List<UnitDTO> findUnits() throws Exception {
 		try {
 			List<UnitDTO> unitDTOList = unitSvc.findUnitAll();
 			if (unitDTOList == null) {
 				throw new Exception("존재하는 조직이 없습니다.");
 			}
-
-// 			List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
-// 			unitList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
 			return unitDTOList;
 
 		} catch (Exception e) {
@@ -45,16 +42,13 @@ public class UnitRestController {
 		}
 	}
 
-	@GetMapping(value = "/unit/{unitCode}")
+	@GetMapping(value = "/{unitCode}")
 	public UnitDTO findUnitByUnitCode(@Valid @PathVariable String unitCode) throws Exception {
 		try {
 			if (unitCode == null) {
 				throw new Exception("조직 번호를 입력받지 못습니다.");
 			}
 			UnitDTO unitDTO = unitSvc.findUnitByUnitCode(unitCode);
-// 			if (unitEntity == null) {
-// 				throw new Exception("조직 번호가 존재하지 않습니다.");
-// 			}
 			return unitDTO;
 
 		} catch (Exception e) {
@@ -79,7 +73,7 @@ public class UnitRestController {
 //		}
 //	}
 
-	@PostMapping(value = "/unit", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertUnit(@Valid @RequestBody UnitDTO unitDTO) throws Exception {
 		try {
 			try {
@@ -96,7 +90,7 @@ public class UnitRestController {
 		}
 	}
 
-	@PostMapping(value = "/unitlist", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/list", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean insertUnitList(@Valid @RequestBody List<UnitDTO> unitDtoList) {
 		try {
 			if (unitDtoList == null) {
@@ -110,7 +104,7 @@ public class UnitRestController {
 		return null;
 	}
 
-	@PutMapping(value = "/unit", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/change", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateUnit(@RequestBody UnitDTO unitDTO) throws Exception {
 		try {
 			try {
@@ -127,14 +121,12 @@ public class UnitRestController {
 		}
 	}
 
-	@DeleteMapping(value = "/unit/{unitCode}")
+	@DeleteMapping(value = "/{unitCode}")
 	public void deleteUnitByUnitCode(@PathVariable String unitCode) throws Exception {
 		try {
 			if (unitCode == null) {
 				throw new Exception("입력받은 조직번호가 없습니다.");
 			}
-			System.out.println("111111111111111111111111111111111111111111111111111111");
-			System.out.println(unitCode);
 			UnitDTO unitDTO = new UnitDTO();
 			unitDTO = findUnitByUnitCode(unitCode);
 			if (unitDTO == null) {
