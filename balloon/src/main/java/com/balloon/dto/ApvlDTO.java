@@ -33,7 +33,9 @@ public class ApvlDTO {
 
 	private LocalDateTime processDate;
 
-	private Employee emp;
+	private Employee drafterEmp;
+
+	private Employee approverEmp;
 
 	private BusinessReport businessReport;
 
@@ -45,7 +47,8 @@ public class ApvlDTO {
 		ApprovalList approvalList = ApprovalList.builder().approvalId(apvlDTO.getApprovalId())
 				.approvalStatus(apvlDTO.getApprovalStatus()).approvalComment(apvlDTO.getApprovalComment())
 				.approverName(apvlDTO.getApproverName()).position(apvlDTO.getPosition())
-				.drafterName(apvlDTO.getDrafterName()).processDate(apvlDTO.getProcessDate()).emp(apvlDTO.getEmp())
+				.drafterName(apvlDTO.getDrafterName()).processDate(apvlDTO.getProcessDate())
+				.drafterEmp(apvlDTO.getDrafterEmp()).approverEmp(apvlDTO.getApproverEmp())
 				.businessReport(apvlDTO.getBusinessReport()).businessTrip(apvlDTO.getBusinessTrip())
 				.personnelAppointment(apvlDTO.getPersonnelAppointment()).build();
 		return approvalList;

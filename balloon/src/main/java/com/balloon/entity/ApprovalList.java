@@ -66,8 +66,14 @@ public class ApprovalList {
 	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@NotNull
-	@JoinColumn(name = "emp_id")
-	private Employee emp;
+	@JoinColumn(name = "drafter_emp_id")
+	private Employee drafterEmp;
+
+	@JsonIgnore
+	@ManyToOne(targetEntity = Employee.class)
+	@NotNull
+	@JoinColumn(name = "approver_emp_id")
+	private Employee approverEmp;
 
 	@JsonIgnore
 	@ManyToOne(targetEntity = BusinessReport.class)
@@ -89,10 +95,27 @@ public class ApprovalList {
 				.approvalStatus(approvalList.getApprovalStatus()).approvalComment(approvalList.getApprovalComment())
 				.approverName(approvalList.getApproverName()).position(approvalList.getPosition())
 				.drafterName(approvalList.getDrafterName()).processDate(approvalList.getProcessDate())
-				.emp(approvalList.getEmp()).businessReport(approvalList.getBusinessReport())
-				.businessTrip(approvalList.getBusinessTrip())
+				.drafterEmp(approvalList.getDrafterEmp()).approverEmp(approvalList.getApproverEmp())
+				.businessReport(approvalList.getBusinessReport()).businessTrip(approvalList.getBusinessTrip())
 				.personnelAppointment(approvalList.getPersonnelAppointment()).build();
 		return apvlDTO;
+	}
+
+	public void updateEntity(Byte approvalStatus, String approvalComment, String approverName, String position,
+			String drafterName, Employee drafterEmp, Employee approverEmp, BusinessReport businessReport,
+			BusinessTripPlan businessTrip, PersonnelAppointment personnelAppointment) {
+
+		this.approvalStatus = approvalStatus;
+		this.approvalComment = approvalComment;
+		this.approverName = approverName;
+		this.position = position;
+		this.drafterName = drafterName;
+		this.drafterEmp = drafterEmp;
+		this.approverEmp = approverEmp;
+		this.businessReport = businessReport;
+		this.businessTrip = businessTrip;
+		this.personnelAppointment = personnelAppointment;
+
 	}
 
 }

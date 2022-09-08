@@ -71,7 +71,6 @@ public class AuthRestController {
 			createCookie.setPath("/");
 			response.addCookie(createCookie);
 		} else {
-			webSecurityConfig.clearJsession();
 			throw new Exception("토큰 생성 에러입니다.");
 		}
 

@@ -49,4 +49,15 @@ public class ChatServiceImpl implements ChatService {
 		chatRepo.save(chat);
 	}
 
+	@Transactional
+	@Override
+	public void insertChats(List<MessageVO> messageVOList) {
+		List<Chat> chatList = new ArrayList<Chat>();
+		for (MessageVO messageVO : messageVOList) {
+			chatList.add(messageVO.toChat(messageVO));
+		}
+		chatRepo.saveAll(chatList);
+	}
+
 }
+

@@ -13,11 +13,21 @@ public interface ApvlSvc {
 
 	public List<ApvlDTO> getApvlByPAId(String docId);
 
-	public List<ApvlDTO> getApvlByApproverNameAndDocStatus(String approver, Byte docStatus);
+	public List<ApvlDTO> getApvlByApproverIdAndDocStatus(String apvrId, Byte docStatus);
 
-	public void deleteApvlByBizRptId(String docId);
+	public ApvlDTO getApvlIdByBizRptIdAndApvrId(String docId, String approver);
 
-	public void deleteApvlByBizTpId(String docId);
+	public ApvlDTO getApvlIdByBizTpIdAndApvrId(String docId, String approver);
 
-	public void deleteApvlByPAId(String docId);
+	public ApvlDTO getApvlIdByPAIdAndApvrId(String docId, String approver);
+
+	public void updateApvl(ApvlDTO apvlDTO);
+
+	public void deleteApvlByBizRptId(String docId, String empId);
+
+	public void deleteApvlByBizTpId(String docId, String empId);
+
+	public void deleteApvlByPAId(String docId, String empId);
+
+//	public void updateApvlByBizRptIdAndApvr(String docId, String apvr);
 }

@@ -17,36 +17,36 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmpResponseDTO {
 
-	private String empId;
-
+	private String empId;      
+	
 	private String empName;
-
+	
 	private String position;
-
+	
 	private String mobile;
-
+	
 	private LocalDate hiredate;
-
+	
 	private Float salary;
-
+	
 	private Float commission;
-
+	
 	private String empMail;
-
+	
 	private String photo;
-
+	
 	private String empBell;
-
+	
 	private LocalDate birthday;
-
+	
 	private String address;
-
+	
 	private String licensePlate;
-
+	
 	private String responsibility;
-
+	
 	private Unit unit;
-
+	
 	private UserRole userRoleGrade;
 
 	public Employee toEntity(EmpResponseDTO employeeDTO) {

@@ -18,17 +18,11 @@ import lombok.ToString;
 @Data
 @ToString
 public class ChatDTO {
-
 	private Long chatId;
-
 	private String chatContent;
-
 	private LocalDateTime chatTime;
-
 	private Long status;
-
 	private Chatroom chatroom;
-
 	private Employee employee;
 
 	public Chat toEntity(ChatDTO chatDTO) {

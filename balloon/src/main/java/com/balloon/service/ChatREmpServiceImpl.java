@@ -85,7 +85,6 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 
 		ChatroomEmployeeId chatroomEmployeeIdEntity = chatroomEmployeeDTO.toId(chatroomEmployeeDTO);
 		chatREmpRepository.deleteById(chatroomEmployeeIdEntity);
-
 	}
 
 }

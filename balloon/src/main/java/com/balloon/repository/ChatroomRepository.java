@@ -8,6 +8,6 @@ import com.balloon.entity.Chatroom;
 @Repository
 public interface ChatroomRepository extends JpaRepository<Chatroom, Long> {
 
-	public Chatroom findChatroomByChatroomId(Long chatroomId);
+   public Chatroom findChatroomByChatroomId(Long chatroomId);
 
 }

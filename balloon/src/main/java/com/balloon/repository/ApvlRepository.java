@@ -16,12 +16,23 @@ public interface ApvlRepository extends JpaRepository<ApprovalList, Integer> {
 
 	public List<ApprovalList> findApprovalListByPersonnelAppointmentPersonnelAppointmentId(String docId);
 
-	public List<ApprovalList> findApprovalListByApproverNameAndApprovalStatus(String approver, Byte docStatus);
+	public List<ApprovalList> findApprovalListByApproverEmpEmpIdAndApprovalStatus(String apvrId, Byte docStatus);
 
-	public void deleteApprovalListByBusinessReportBusinessReportId(String docId);
+	public ApprovalList findApprovalIdByBusinessReportBusinessReportIdAndApproverEmpEmpId(String docId,
+			String approver);
 
-	public void deleteApprovalListByBusinessTripBusinessTripId(String docId);
+	public ApprovalList findApprovalIdByBusinessTripBusinessTripIdAndApproverEmpEmpId(String docId, String approver);
 
-	public void deleteApprovalListByPersonnelAppointmentPersonnelAppointmentId(String docId);
+	public ApprovalList findApprovalIdByPersonnelAppointmentPersonnelAppointmentIdAndApproverEmpEmpId(String docId,
+			String approver);
+
+	public void deleteApprovalListByBusinessReportBusinessReportIdAndApproverEmpEmpId(String docId, String empId);
+
+	public void deleteApprovalListByBusinessTripBusinessTripIdAndApproverEmpEmpId(String docId, String empId);
+
+	public void deleteApprovalListByPersonnelAppointmentPersonnelAppointmentIdAndApproverEmpEmpId(String docId,
+			String empId);
+
+	public ApprovalList findApprovalListByBusinessReportBusinessReportIdAndApproverName(String docId, String apvr);
 
 }

@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/chatroom")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://15.164.224.26:8080" })
 public class ChatroomRestController {
 
 	private final ChatroomServiceImpl chatroomSvc;

@@ -63,6 +63,12 @@ public class BizRptSvcImpl implements BizRptSvc {
 		return voList;
 	}
 
+//	@Override
+//	public List<DocVO> getDocByEmpName(String empName) {
+//		
+//		return null;
+//	}
+
 	@Override
 	public BizRptDTO getBizRptByBizRptId(String bizRptId) {
 		BusinessReport businessReport = bizRptRepo.findBusinessReportByBusinessReportId(bizRptId);

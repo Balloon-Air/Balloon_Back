@@ -1,13 +1,5 @@
 package com.balloon.config;
 
-import java.util.Collections;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.SessionCookieConfig;
-import javax.servlet.SessionTrackingMode;
-
-import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -78,22 +70,11 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		return http.build();
 	}
 
-	// JSESSIONID 삭제
-	@Bean
-	public ServletContextInitializer clearJsession() {
-		return new ServletContextInitializer() {
-			@Override
-			public void onStartup(ServletContext servletContext) throws ServletException {
-				servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
-				SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
-				sessionCookieConfig.setHttpOnly(true);
-			}
-		};
-	}
-
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://localhost:3000")
+		registry.addMapping("/**")
+//		.allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080")
+				.allowedOrigins("http://localhost:3000")
 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
 				.allowCredentials(true).maxAge(MAX_AGE_SECS);
 	}

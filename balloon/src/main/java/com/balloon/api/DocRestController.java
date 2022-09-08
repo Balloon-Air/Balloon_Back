@@ -47,6 +47,15 @@ public class DocRestController {
 		return list;
 	}
 
+//	@GetMapping(value = "/apvldocs/{empName}")
+//	public List<DocVO> getDocByApvrName(@PathVariable("empName") String empName) {
+//		List<DocVO> list = new ArrayList<DocVO>();
+//		list.addAll(BizRptSvc.getDocByEmpName(empName));
+//		list.addAll(BizTpSvc.getDocByEmpName(empName));
+//		list.addAll(PASvc.getDocByEmpName(empName));
+//		return list;
+//	}
+
 //	@GetMapping(value = "/dc")
 //	@GetMapping(value = "/ds")
 //	@GetMapping(value = "/dr")

@@ -48,7 +48,6 @@ public class ChatroomEmployee {
 	@Column(name = "exit_time")
 	private LocalDateTime exitTime;
 
-	@CreatedDate
 	@Column(name = "in_time")
 	private LocalDateTime inTime;
 
@@ -60,5 +59,4 @@ public class ChatroomEmployee {
 				.inTime(chatroomEmployeeEntity.getInTime()).build();
 		return chatroomEmployeeDTO;
 	}
-
 }

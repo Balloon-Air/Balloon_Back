@@ -12,10 +12,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-
 public class BizTpDTO {
 	private String businessTripId;
 

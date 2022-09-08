@@ -40,7 +40,7 @@ public class PADTO {
 
 	private LocalDateTime updateDate;
 
-	private Employee movedEmpId;
+	private Employee movedEmp;
 
 	private Employee emp;
 
@@ -52,7 +52,7 @@ public class PADTO {
 				.documentContent(paDTO.getDocumentContent()).documentStatus(paDTO.getDocumentStatus())
 				.personnelDate(paDTO.getPersonnelDate()).position(paDTO.getPosition()).unitName(paDTO.getUnitName())
 				.movedEmpName(paDTO.getMovedEmpName()).empName(paDTO.getEmpName()).writeDate(paDTO.getWriteDate())
-				.updateDate(paDTO.getUpdateDate()).movedEmpId(paDTO.getMovedEmpId()).emp(paDTO.getEmp())
+				.updateDate(paDTO.getUpdateDate()).movedEmp(paDTO.getMovedEmp()).emp(paDTO.getEmp())
 				.unit(paDTO.getUnit()).build();
 
 		return personnelAppointment;

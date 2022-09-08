@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e18cbb63.css",
+    "main.js": "/static/js/main.7b231cf3.js",
+    "static/js/787.55f4e1da.chunk.js": "/static/js/787.55f4e1da.chunk.js",
+    "static/media/NotoSans.ttf": "/static/media/NotoSans.e1aa54c04a18648e6468.ttf",
+    "static/media/banner.svg": "/static/media/banner.74a67c7fb37196209f5f7e198940d44b.svg",
+    "index.html": "/index.html",
+    "main.e18cbb63.css.map": "/static/css/main.e18cbb63.css.map",
+    "main.7b231cf3.js.map": "/static/js/main.7b231cf3.js.map",
+    "787.55f4e1da.chunk.js.map": "/static/js/787.55f4e1da.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e18cbb63.css",
+    "static/js/main.7b231cf3.js"
+  ]
+}

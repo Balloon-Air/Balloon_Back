@@ -4,7 +4,6 @@ spring:
   profiles:
     include: mysql, jwt, aws
 
-
   # JPA
   jpa:
     hibernate:

@@ -17,7 +17,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.PADTO;
 import com.balloon.vo.DocVO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -80,17 +79,17 @@ public class PersonnelAppointment {
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "moved_emp_id")
-	private Employee movedEmpId;
+	private Employee movedEmp;
 
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "emp_id")
 	private Employee emp;
 
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(targetEntity = Unit.class)
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
@@ -103,7 +102,7 @@ public class PersonnelAppointment {
 				.personnelDate(personnelAppointment.getPersonnelDate()).position(personnelAppointment.getPosition())
 				.unitName(personnelAppointment.getUnitName()).movedEmpName(personnelAppointment.getMovedEmpName())
 				.empName(personnelAppointment.getEmpName()).writeDate(personnelAppointment.getWriteDate())
-				.updateDate(personnelAppointment.getUpdateDate()).movedEmpId(personnelAppointment.getMovedEmpId())
+				.updateDate(personnelAppointment.getUpdateDate()).movedEmp(personnelAppointment.getMovedEmp())
 				.emp(personnelAppointment.getEmp()).unit(personnelAppointment.getUnit()).build();
 
 		return paDTO;

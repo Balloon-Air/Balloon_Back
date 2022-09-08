@@ -14,6 +14,8 @@ public interface BizRptSvc {
 
 	public List<DocVO> getDocbyUnitCode(String unitCode);
 
+//	public List<DocVO> getDocByEmpName(String empName);
+
 	public BizRptDTO getBizRptByBizRptId(String businessReportId);
 
 	public void deleteBizRptByBizRptId(String businessReportId);
