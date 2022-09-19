@@ -26,6 +26,20 @@ public class BizTpRestController {
 	// CREATE -------------------------------
 	@PostMapping(value = "/biztp", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertBizTP(@RequestBody BizTpDTO bizTpDTO) {
+//		bizTpDTO.setBusinessTripId(bizTpDTO.getBusinessTripId());
+//		bizTpDTO.setDocumentTitle(bizTpDTO.getDocumentTitle());
+//		bizTpDTO.setDocumentContent(bizTpDTO.getDocumentContent());
+//		bizTpDTO.setDocumentStatus(bizTpDTO.getDocumentStatus());
+//		bizTpDTO.setStartDate(bizTpDTO.getStartDate());
+//		bizTpDTO.setEndDate(bizTpDTO.getEndDate());
+//		bizTpDTO.setDestination(bizTpDTO.getDestination());
+//		bizTpDTO.setVisitingPurpose(bizTpDTO.getVisitingPurpose());
+//		bizTpDTO.setEmpName(bizTpDTO.getEmpName());
+//		bizTpDTO.setPosition(bizTpDTO.getPosition());
+//		bizTpDTO.setUnitName(bizTpDTO.getUnitName());
+//		bizTpDTO.setUnit(bizTpDTO.getUnit());
+//		bizTpDTO.setEmp(bizTpDTO.getEmp());
+
 		BizTpSvc.insertBizTp(bizTpDTO);
 	}
 

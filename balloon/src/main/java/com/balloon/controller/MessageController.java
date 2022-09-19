@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+//@CrossOrigin(origins = { "http://localhost:3000"})
+//@CrossOrigin(origins = { "http://15.164.224.26:80"})
 public class MessageController {
 	// 특정 broker로 메세지를 전달
 	private final SimpMessagingTemplate template;

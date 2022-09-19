@@ -8,6 +8,4 @@ public interface BizTpEmpSvc {
 	public void insertBizTpEmp(BizTpEmpDTO bizTpEmpDTO);
 
 	public List<BizTpEmpDTO> getBizTpEmpByBizTpId(String bizTpId);
-
-	public void deleteBizTpEmpByBizTpId(String bizTpId);
 }

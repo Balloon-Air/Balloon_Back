@@ -26,6 +26,19 @@ public class PARestController {
 	// CREATE -------------------------------
 	@PostMapping(value = "/pa", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertPA(@RequestBody PADTO paDTO) {
+//		paDTO.setPersonnelAppointmentId(paDTO.getPersonnelAppointmentId());
+//		paDTO.setDocumentTitle(paDTO.getDocumentTitle());
+//		paDTO.setDocumentContent(paDTO.getDocumentContent());
+//		paDTO.setDocumentStatus(paDTO.getDocumentStatus());
+//		paDTO.setPersonnelDate(paDTO.getPersonnelDate());
+//		paDTO.setPosition(paDTO.getPosition());
+//		paDTO.setUnitName(paDTO.getUnitName());
+//		paDTO.setMovedEmpName(paDTO.getMovedEmpName());
+//		paDTO.setEmpName(paDTO.getEmpName());
+//		paDTO.setMovedEmpId(paDTO.getMovedEmpId());
+//		paDTO.setEmp(paDTO.getEmp());
+//		paDTO.setUnit(paDTO.getUnit());
+
 		PASvc.insertPA(paDTO);
 	}
 
@@ -48,6 +61,7 @@ public class PARestController {
 	}
 
 	// DELETE -------------------------------
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/pa/{PAId}")
 	public void deletePAByPAId(@PathVariable("PAId") String PAId) {
 		PASvc.deletePAByPAId(PAId);

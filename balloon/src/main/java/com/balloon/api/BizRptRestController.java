@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class BizRptRestController {
 
 	private final BizRptSvcImpl BizRptSvc;
@@ -26,6 +27,16 @@ public class BizRptRestController {
 	// CREATE -------------------------------
 	@PostMapping(value = "/bizrpt", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertBizRpt(@RequestBody BizRptDTO bizRptDTO) {
+//		bizRptDTO.setBusinessReportId(bizRptDTO.getBusinessReportId());
+//		bizRptDTO.setDocumentTitle(bizRptDTO.getDocumentTitle());
+//		bizRptDTO.setDocumentContent(bizRptDTO.getDocumentContent());
+//		bizRptDTO.setDocumentStatus(bizRptDTO.getDocumentStatus());
+//		bizRptDTO.setEmpName(bizRptDTO.getEmpName());
+//		bizRptDTO.setPosition(bizRptDTO.getPosition());
+//		bizRptDTO.setUnitName(bizRptDTO.getUnitName());
+//		bizRptDTO.setUnit(bizRptDTO.getUnit());
+//		bizRptDTO.setEmp(bizRptDTO.getEmp());
+
 		BizRptSvc.insertBizRpt(bizRptDTO);
 	}
 
@@ -48,8 +59,7 @@ public class BizRptRestController {
 	}
 
 	// DELETE -------------------------------
-//	@CrossOrigin(origins = { "http://localhost:3000"})
-	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/bizrpt/{bizRptId}")
 	public void deleteBizRptByBizRptId(@PathVariable("bizRptId") String bizRptId) {
 		BizRptSvc.deleteBizRptByBizRptId(bizRptId);

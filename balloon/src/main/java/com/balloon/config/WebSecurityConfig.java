@@ -44,13 +44,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
 
-//				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
-
 		http.authorizeRequests()
 
 //				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
 ////				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").hasAnyRole("USER", "MANAGER", "ADMIN")//
-
 //				.antMatchers("/chatstart").hasAnyRole("USER", "MANAGER", "ADMIN")//
 ////				.permitAll()//
 //				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
@@ -59,11 +56,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
-//				.anyRequest().authenticated();//
 //				.antMatchers(HttpMethod.PUT, "/employee/update/admin").hasRole("ADMIN")//
 //				.anyRequest().hasAnyRole("USER", "MANAGER", "ADMIN");//
 				.anyRequest().permitAll();//
+
 		http.logout().permitAll();
+
 		http.exceptionHandling().accessDeniedPage("/accesDenied");
 		http.apply(new JwtSecurityConfig(tokenProvider));
 

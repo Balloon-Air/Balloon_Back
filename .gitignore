@@ -24,8 +24,8 @@ local.properties
 .recommenders
 application-mysql.properties
 application-jwt.properties
-application-aws.properties
 *.properties
+
 
 # servers
 servers/
@@ -35,7 +35,6 @@ context.xml
 server.xml
 tomcat-users.xml
 web.xml
-
 
 # External tool builders
 .externalToolBuilders/

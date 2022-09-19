@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/unit")
 @RequiredArgsConstructor
+//@CrossOrigin(origins = { "http://localhost:3000" })
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;

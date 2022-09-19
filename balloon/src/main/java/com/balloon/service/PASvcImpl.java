@@ -62,9 +62,14 @@ public class PASvcImpl implements PASvc {
 	}
 
 	@Override
+	public void deletePAByPAId(String PAId) {
+		PARepo.deleteById(PAId);
+	}
+
+	@Override
 	public PADTO getPAWD() {
-		PersonnelAppointment personnelAppointment = PARepo.findTopByOrderByPersonnelAppointmentIdDesc();
-		if (personnelAppointment != null) {
+		if (PARepo.findTopByOrderByWriteDateDesc() != null) {
+			PersonnelAppointment personnelAppointment = PARepo.findTopByOrderByWriteDateDesc();
 			PADTO paDTO = personnelAppointment.toDTO(personnelAppointment);
 			return paDTO;
 		} else {
@@ -72,8 +77,4 @@ public class PASvcImpl implements PASvc {
 		}
 	}
 
-	@Override
-	public void deletePAByPAId(String PAId) {
-		PARepo.deleteById(PAId);
-	}
 }
