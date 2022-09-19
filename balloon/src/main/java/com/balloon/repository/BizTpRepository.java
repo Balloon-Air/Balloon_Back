@@ -20,6 +20,7 @@ public interface BizTpRepository
 	public List<BusinessTripPlan> findBusinessTripIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(
 			String unitCode, Byte documentStatus);
 
-	public BusinessTripPlan findTopByOrderByBusinessTripIdDesc();
+	public BusinessTripPlan findTopByOrderByWriteDateDesc();
 
+//	public BusinessTripPlan findBusinessTripPlanByEmpId(String empId);
 }

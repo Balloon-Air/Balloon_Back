@@ -44,6 +44,7 @@ public class BusinessReport {
 	@Column(name = "document_title", length = 45)
 	private String documentTitle;
 
+	@NotNull
 	@Column(name = "document_content", length = 2000)
 	private String documentContent;
 
